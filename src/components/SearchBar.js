@@ -1,34 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class SearchBar extends React.Component {
-    state = { term: '' };
+const SearchBar = ({ onFormSubmit }) => {
+  const [term, setTerm] = useState('');
 
-    onInputChange = event => {
-        this.setState({ term: event.target.value });
+  const onInputChange = event => {
+    setTerm(event.target.value)
     };
 
-    onFormSubmit = event => {
-        event.preventDefault();
+  const onSubmit = event => {
+    event.preventDefault();
 
-        this.props.onFormSubmit(this.state.term);
-    };
+    onFormSubmit(term);
+  };
 
-    render() {
-        return (
-            <div className="ui segment">
-                <form onSubmit={this.onFormSubmit} className="ui form">
-                    <div className="field">
-                        <label>Video Search</label> 
-                        <input
-                        type="text"
-                        value={this.state.term}
-                        onChange={event => this.setState({ term: event.target.value })}
-                        />
-                    </div>
-                </form>
-            </div>
-        )
-    }
-}
+  return (
+    <div className="ui segment">
+        <form onSubmit={onSubmit} className="ui form">
+            <div className="field">
+                <label>Video Search</label>
+                  <input
+                    type="text"
+                    value={term}
+                    onChange={onInputChange}
+                  />
+              </div>
+        </form>
+    </div>
+  )
+};
 
-export default SearchBar; 
+export default SearchBar;
+
+// class SearchBar extends React.Component {
+    // state = { term: '' };
+
+    // onInputChange = event => {
+    //     this.setState({ term: event.target.value });
+    // };
+
+    // onFormSubmit = event => {
+    //     event.preventDefault();
+
+    //     this.props.onFormSubmit(this.state.term);
+    // };
+
+//     render() {
+//         return (
+//             <div className="ui segment">
+//                 <form onSubmit={this.onFormSubmit} className="ui form">
+//                     <div className="field">
+//                         <label>Video Search</label>
+//                         <input
+//                         type="text"
+//                         value={this.state.term}
+//                         onChange={event => this.setState({ term: event.target.value })}
+//                         />
+//                     </div>
+//                 </form>
+//             </div>
+//         )
+//     }
+// }
+
+// export default SearchBar;
